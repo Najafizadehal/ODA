@@ -71,4 +71,11 @@ def most_successful(df, sport):
 
         return x
 
+def yearwise_medal_tally(df,country):
+    temp_df = df.fropna(subset=['Medal'])
+    temp_df.drop_duplicates(subset=['Team', 'NOC','Games','Year','City', 'Sport','Event','Medal'], inplace = True)
+
+    new_df = temp_df[temp_df['region'] == country]
+    final_df = new_df.groupby('Year').count()['Medal'].reset_index()
+
 
