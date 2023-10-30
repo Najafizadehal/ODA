@@ -113,3 +113,9 @@ if user_menu == 'Country-wise Analysis':
     fig = px.line(country_df, x='Year', y='Medal')
     st.title(selected_country + " Medal Tally Over thr years")
     st.plotly_chart(fig)
+
+    st.title(selected_country + " excels in the following sports")
+    pt = helper.country_event_heatmap(df,selected_country)
+    fig, ax = plt.subplots(figsize = (20, 20))
+    ax = sns.heatmap(pt, annot=True)
+    st.pyplot(fig)
