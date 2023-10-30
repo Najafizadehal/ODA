@@ -1,27 +1,28 @@
 import streamlit as st
 import pandas as pd
-import preprocesseor,helper
+import preprocesseor, helper
 import plotly.express as px
 import matplotlib.pyplot as plt
 import seaborn as sns
+
 df = pd.read_csv('/home/abdollatif/Desktop/ODA/athlete_events.csv')
 region_df = pd.read_csv('/home/abdollatif/Desktop/ODA/noc_regions.csv')
 
 df = preprocesseor.preprocess(df, region_df)
 st.sidebar.title("Olympic Analysis")
 user_menu = st.sidebar.radio(
-                 'select an option',
-                 ('Medal Tally','Overall Analysis','Country-wise Analysis','Atlete wise Analysis')
+    'select an option',
+    ('Medal Tally', 'Overall Analysis', 'Country-wise Analysis', 'Atlete wise Analysis')
 )
 
 if user_menu == 'Medal Tally':
     st.sidebar.header("Medal Tally")
-    years,country = helper.country_year_list(df)
+    years, country = helper.country_year_list(df)
 
-    select_year = st.sidebar.selectbox("select year",years)
-    select_country = st.sidebar.selectbox("select country",country)
+    select_year = st.sidebar.selectbox("select year", years)
+    select_country = st.sidebar.selectbox("select country", country)
 
-    medal_tally = helper.fetch_medal_tally(df,select_year,select_country)
+    medal_tally = helper.fetch_medal_tally(df, select_year, select_country)
     if select_country == 'Overall' and select_year == 'Overall':
         st.title("Overall Tally")
     if select_country == 'Overall' and select_year != 'Overall':
@@ -39,7 +40,6 @@ if user_menu == 'Overall Analysis':
     events = df['Event'].unique().shape[0]
     athletes = df['Name'].unique().shape[0]
     nation = df['region'].unique().shape[0]
-
 
     st.title("Top Statistic")
     col1, col2, col3 = st.columns(3)
@@ -64,9 +64,8 @@ if user_menu == 'Overall Analysis':
         st.header("Nation")
         st.title(nation)
 
-
     st.title("Participating Nation Over Year")
-    nation_over_time = helper.data_over_time(df,'region')
+    nation_over_time = helper.data_over_time(df, 'region')
     fig = px.line(nation_over_time, x='Year', y='count')
     st.plotly_chart(fig)
 
@@ -86,9 +85,10 @@ if user_menu == 'Overall Analysis':
     st.plotly_chart(fig)
 
     st.title("Number of Events over time(Every Sports)")
-    fig, ax = plt.subplots(figsize=(20,20))
+    fig, ax = plt.subplots(figsize=(20, 20))
     x = df.drop_duplicates((['Year', 'Sport', 'Event']))
-    sns.heatmap(x.pivot_table(index='Sport', columns='Year', values='Event',aggfunc='count').fillna(0).astype(int),annot = True)
+    sns.heatmap(x.pivot_table(index='Sport', columns='Year', values='Event', aggfunc='count').fillna(0).astype(int),
+                annot=True)
 
     st.pyplot(fig)
 
@@ -98,18 +98,18 @@ if user_menu == 'Overall Analysis':
     sport_list.insert(0, 'Overall')
 
     selected_sport = st.selectbox('Select a Sport', sport_list)
-    x = helper.most_successful(df,selected_sport)
+    x = helper.most_successful(df, selected_sport)
 
     st.table(x)
 if user_menu == 'Country-wise Analysis':
     st.title("Country-wise Analysis")
 
-    country_list = df['region'].unique().tolist()
+    country_list = df['region'].dropna().unique().tolist()
     # country_list.sort()
 
-    selected_country = st.selectbox("select a country",country_list)
+    selected_country = st.selectbox("select a country", country_list)
 
-    country_df = helper.yearwise_medal_tally(df,selected_country)
-    fig = px.line(country_df, x= 'Year', y='Medal')
-    st.title(selected_country +" Medal Tally Over thr years")
+    country_df = helper.yearwise_medal_tally(df, selected_country)
+    fig = px.line(country_df, x='Year', y='Medal')
+    st.title(selected_country + " Medal Tally Over thr years")
     st.plotly_chart(fig)
