@@ -2,7 +2,8 @@ import streamlit as st
 import pandas as pd
 import preprocesseor,helper
 import plotly.express as px
-
+import matplotlib.pyplot as plt
+import seaborn as sns
 df = pd.read_csv('/home/abdollatif/Desktop/ODA/athlete_events.csv')
 region_df = pd.read_csv('/home/abdollatif/Desktop/ODA/noc_regions.csv')
 
@@ -83,3 +84,10 @@ if user_menu == 'Overall Analysis':
     athletes_over_time = helper.data_over_time(df, 'Name')
     fig = px.line(athletes_over_time, x='Year', y='count')
     st.plotly_chart(fig)
+
+    st.title("Number of Events over time(Every Sports)")
+    fig, ax = plt.subplots(figsize=(20,20))
+    x = df.drop_duplicates((['Year', 'Sport', 'Event']))
+    sns.heatmap(x.pivot_table(index='Sport', columns='Year', values='Event',aggfunc='count').fillna(0).astype(int),annot = True)
+
+    st.pyplot(fig)
