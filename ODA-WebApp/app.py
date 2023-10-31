@@ -6,6 +6,7 @@ import plotly.express as px
 import matplotlib.pyplot as plt
 import seaborn as sns
 import plotly.figure_factory as ff
+
 df = pd.read_csv('/home/abdollatif/Desktop/ODA/athlete_events.csv')
 region_df = pd.read_csv('/home/abdollatif/Desktop/ODA/noc_regions.csv')
 
@@ -125,7 +126,7 @@ if user_menu == 'Country-wise Analysis':
     st.table(top10_df)
 
 if user_menu == 'Athlete wise Analysis':
-    athlete_df = df.drop_duplicates(subset=['Name','region'])
+    athlete_df = df.drop_duplicates(subset=['Name', 'region'])
 
     x1 = athlete_df['Age'].dropna()
     x2 = athlete_df[athlete_df['Medal'] == 'Gold']['Age'].dropna()
@@ -159,7 +160,7 @@ if user_menu == 'Athlete wise Analysis':
 
     st.title('Height Vs Weight')
     selected_sport = st.selectbox('Select a Sport', sport_list)
-    temp_df = helper.weight_v_height(df,selected_sport)
+    temp_df = helper.weight_v_height(df, selected_sport)
     fig, ax = plt.subplots()
-    ax = sns.scatterplot(x=temp_df['Weight'], y=temp_df['Height'],hue=temp_df['Medal'],style=temp_df['Sex'],s=60)
+    ax = sns.scatterplot(x=temp_df['Weight'], y=temp_df['Height'], hue=temp_df['Medal'], style=temp_df['Sex'], s=60)
     st.pyplot(fig)
