@@ -13,25 +13,25 @@ Before running the script, make sure you have the following installed:
 
 Installation
 
-    Clone the repository:
+Clone the repository:
 
-   git clone https://github.com/your-username/olympic-data-analysis.git
+    git clone https://github.com/your-username/olympic-data-analysis.git
 
-    Install the required dependencies:
+Install the required dependencies:
 
    pip install streamlit pandas plotly matplotlib seaborn
 
 Usage
 
-    Navigate to the project directory:
+Navigate to the project directory:
 
    cd olympic-data-analysis
 
-    Run the Streamlit app:
+Run the Streamlit app:
 
    streamlit run olympic_analysis.py
 
-    Access the dashboard in your web browser at the provided URL.
+Access the dashboard in your web browser at the provided URL.
 
 Features
 
