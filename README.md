@@ -19,17 +19,17 @@ Clone the repository:
 
 Install the required dependencies:
 
-   pip install streamlit pandas plotly matplotlib seaborn
+       pip install streamlit pandas plotly matplotlib seaborn
 
 Usage
 
 Navigate to the project directory:
 
-   cd olympic-data-analysis
+       cd olympic-data-analysis
 
 Run the Streamlit app:
 
-   streamlit run olympic_analysis.py
+       streamlit run olympic_analysis.py
 
 Access the dashboard in your web browser at the provided URL.
 
