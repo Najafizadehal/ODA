@@ -15,17 +15,9 @@ Installation
 
     Clone the repository:
 
-bash
-
-Copy
-
    git clone https://github.com/your-username/olympic-data-analysis.git
 
     Install the required dependencies:
-
-bash
-
-Copy
 
    pip install streamlit pandas plotly matplotlib seaborn
 
@@ -33,17 +25,9 @@ Usage
 
     Navigate to the project directory:
 
-bash
-
-Copy
-
    cd olympic-data-analysis
 
     Run the Streamlit app:
-
-bash
-
-Copy
 
    streamlit run olympic_analysis.py
 
