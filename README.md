@@ -1,8 +1,8 @@
 # ODA
 Olympic Data Analysis Dashboard
 This Python script creates a web-based dashboard using Streamlit for analyzing Olympic data. The dashboard provides various features for exploring and visualizing Olympic data, including medal tallies, overall analysis, country-wise analysis, and athlete-wise analysis.
-Prerequisites
-Before running the script, make sure you have the following installed:
+
+PrerequisitesBefore running the script, make sure you have the following installed:
 
     Python 3.x
     Streamlit
